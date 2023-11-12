@@ -1,0 +1,32 @@
+
+
+.grid-container{
+    flex-direction: row;
+    display: grid;
+    grid-template-rows: repeat(1000, 1fr);
+    height: 40000px;
+}
+
+.cell{
+    border: 1px solid black;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.freeze{
+    position:sticky;
+    background-color: blue;
+}
+
+::deep .top-one{
+    top:0;
+    z-index: 10;
+}
+::deep .top-two{
+    top:2.5rem;
+    z-index: 10;
+}
+::deep .top-three{
+    top:5rem;
+    z-index: 10;
+}

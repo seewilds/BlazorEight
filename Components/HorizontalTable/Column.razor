@@ -1,0 +1,19 @@
+@using BlazorEight.Model;
+@using Bogus;
+
+
+    <div class="grid-container">
+        <div class="cell freeze top-one">@Date.Year.ToString()</div>
+        <div class="cell freeze top-two">@Date.Month.ToString()</div>
+        <div class="cell freeze top-three">@Date.Day.ToString()</div>
+        @for(int j = 0; j < 1000; j++)
+        {
+            <div class="cell"></div>    
+        }
+    </div>
+    
+
+@code{
+    [Parameter]
+    public DateTime Date {get;set;}
+}

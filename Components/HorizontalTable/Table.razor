@@ -1,0 +1,40 @@
+@using BlazorEight.Model;
+@using BlazorSandboxEight.Virtualization
+@using Bogus;
+
+
+<div class="main-container" style="display:flex;flex-direction:row;width:500px; overflow-x:scroll;" >
+    <div class="name-container">
+        <div class="name-cell freeze top-one"></div>
+        <div class="name-cell freeze top-two"></div>
+        <div class="name-cell freeze top-three"></div>
+        @foreach(var o in _officers)
+        {
+            <div class="name-cell">@o.Name</div>
+        }
+    </div>
+    <HorizontalVirtualizer Items="@_dates" ItemSize="40">
+        <Column Date="context"/>
+    </HorizontalVirtualizer>
+</div>
+    
+
+@code{
+    private List<Officer> _officers = new(); 
+    private List<DateTime> _dates = new();
+    protected override void OnInitialized()
+    {
+        var id = 0;
+        var faker = new Faker<Officer>()
+            .RuleFor(o=> o.Id, f => id++)
+            .RuleFor(o=> o.Name, f=> f.Name.FullName())
+            .RuleFor(o=> o.UserName, f => f.Name.FullName());
+        
+        for(int i = 0; i < 1000; i++)
+        {
+            _officers.Add(faker.Generate());
+            _dates.Add(DateTime.Now.AddDays(i));
+        }
+        StateHasChanged();
+    }
+}

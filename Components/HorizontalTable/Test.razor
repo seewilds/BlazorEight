@@ -1,0 +1,50 @@
+@using BlazorEight.Model;
+@using Bogus;
+
+
+<div class="main-container" style="max-height:@((59*2.5).ToString() + "rem")">
+    <div class="name-container">
+        <div class="name-cell freeze top-one top-cell"></div>
+        <div class="name-cell freeze top-two top-cell"></div>
+        <div class="name-cell freeze top-three top-cell"></div>
+        @foreach(var o in _officers)
+        {
+            <div class="name-cell">@o.Name</div>
+        }
+    </div>
+
+@for(int i = 0; i < 100; i++)
+{
+    int z = i;
+    <div class="grid-container">
+        <div class="cell freeze top-one">@DateTime.Now.AddDays(z).Year.ToString()</div>
+        <div class="cell freeze top-two">@DateTime.Now.AddDays(z).Month.ToString()</div>
+        <div class="cell freeze top-three">@DateTime.Now.AddDays(z).Day.ToString()</div>
+        @for(int j = 0; j < 53; j++)
+        {
+            <div class="cell"></div>    
+        }
+    </div>
+
+}
+    
+</div>
+    
+
+@code{
+    private List<Officer> _officers = new(); 
+    protected override void OnInitialized()
+    {
+        var id = 0;
+        var faker = new Faker<Officer>()
+            .RuleFor(o=> o.Id, f => id++)
+            .RuleFor(o=> o.Name, f=> f.Name.FullName())
+            .RuleFor(o=> o.UserName, f => f.Name.FullName());
+        
+        for(int i = 0; i < 56; i++)
+        {
+            _officers.Add(faker.Generate());
+        }
+        StateHasChanged();
+    }
+}

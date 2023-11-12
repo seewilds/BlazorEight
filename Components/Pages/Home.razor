@@ -1,0 +1,41 @@
+﻿@attribute [RenderModeInteractiveServer]
+@page "/"
+
+@using BlazorEight.Model;
+@using Bogus;
+@using BlazorSandboxEight.Virtualization;
+
+
+@* <div style="display:flex;flex-direction:column;height:250px; overflow-y:scroll;" tabindex="-1">
+    <Virtualizer Items="@_officers" ItemSize="50">
+        <div style="height:50px;background-color:blue;flex-shrink: 0;">Flight @context.Name</div>
+    </Virtualizer>
+</div>
+<br/> *@
+
+<div style="display:flex;flex-direction:row;width:500px; overflow-x:scroll;" tabindex="-1" ItemSize="100">
+    <HorizontalVirtualizer Items="@_officers" ItemSize="50">
+        <div @key="@context.Id" style="width:100px;background-color:blue;flex-shrink: 0;">@context.Id</div>
+    </HorizontalVirtualizer>
+</div>
+<br/>
+
+<Table/>
+
+@code{
+    private List<Officer> _officers = new(); 
+    protected override void OnInitialized()
+    {
+        var id = 0;
+        var faker = new Faker<Officer>()
+            .RuleFor(o=> o.Id, f => id++)
+            .RuleFor(o=> o.Name, f=> f.Name.FullName())
+            .RuleFor(o=> o.UserName, f => f.Name.FullName());
+        
+        for(int i = 0; i <1000; i++)
+        {
+            _officers.Add(faker.Generate());
+        }
+        StateHasChanged();
+    }
+}

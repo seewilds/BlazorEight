@@ -1,0 +1,44 @@
+.main-container{
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: 750px;
+}
+
+.name-container{
+    position:sticky;
+    left:0;
+    display: grid;
+    width:8rem;
+    grid-template-rows: repeat(1000, 1fr);
+    height: 40000px;
+    z-index:66;
+}
+
+
+.name-cell{
+    display:flex;
+    justify-items: center;
+    align-items: center;
+    height:2.5rem;
+    width:8rem;
+    background-color: white;
+    z-index:50;
+}
+
+.freeze{
+    position:sticky;
+    z-index:65;
+    background-color: white;
+}
+
+.top-one{
+    top:0;
+}
+.top-two{
+    top:2.5rem;
+}
+.top-three{
+    top:5rem;
+}
