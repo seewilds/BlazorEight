@@ -241,6 +241,8 @@ public sealed class HorizontalVirtualizer<TItem> : ComponentBase, IVirtualizeJsC
             // Render the loaded items.
             foreach (var item in itemsToShow)
             {
+                // _itemTemplate is a delegate of RenderFragment<TItem> returns a RenderFragment
+                // (_itemTemplate(item)) is a delegate of type RenderFragment that returns void 
                 _itemTemplate(item)(builder);
                 _lastRenderedItemCount++;
             }
