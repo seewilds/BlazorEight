@@ -274,7 +274,7 @@ public sealed class HorizontalVirtualizer<TItem> : ComponentBase, IVirtualizeJsC
     }
 
     private string GetSpacerStyle(int itemsInSpacer)
-        => $"width: {(itemsInSpacer * _itemSize).ToString(CultureInfo.InvariantCulture)}px; flex-shrink: 0;";
+        => $"width: {(itemsInSpacer * _itemSize).ToString(CultureInfo.InvariantCulture)}px; flex-shrink: 0;height:4000px;";
 
     void IVirtualizeJsCallbacks.OnBeforeSpacerVisible(float spacerSize, float spacerSeparation, float containerSize)
     {
@@ -423,7 +423,7 @@ public sealed class HorizontalVirtualizer<TItem> : ComponentBase, IVirtualizeJsC
     private RenderFragment DefaultPlaceholder(PlaceholderContext context) => (builder) =>
     {
         builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "style", $"width: {_itemSize.ToString(CultureInfo.InvariantCulture)}px; flex-shrink: 0;");
+        builder.AddAttribute(1, "style", $"width: {_itemSize.ToString(CultureInfo.InvariantCulture)}px; flex-shrink: 0;height:40000px;");
         builder.CloseElement();
     };
 
